@@ -4,8 +4,10 @@ package plugindemo
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"text/template"
 )
 
@@ -57,6 +59,18 @@ func (a *Demo) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			http.Error(rw, err.Error(), http.StatusInternalServerError)
 			return
+		}
+
+		file, err := os.Create("/tmp/output.json")
+		if err == nil {
+			defer file.Close()
+			encoder := json.NewEncoder(file)
+			encoder.SetIndent("", "  ") // Pretty-print JSON
+			if err := encoder.Encode(req.Header); err != nil {
+				fmt.Println("Error encoding JSON:", err)
+			}
+		} else {
+			fmt.Println("Error creating file:", err)
 		}
 
 		req.Header.Set(key, writer.String())

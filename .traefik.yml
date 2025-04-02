@@ -2,7 +2,7 @@ displayName: Demo Plugin
 type: middleware
 iconPath: .assets/icon.png
 
-import: github.com/traefik/plugindemo
+import: github.com/profiprog/reverse_heders
 
 summary: '[Demo] Add Request Header'
 

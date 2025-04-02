@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/traefik/plugindemo"
+	plugindemo "github.com/profiprog/reverse_heders"
 )
 
 func TestDemo(t *testing.T) {
